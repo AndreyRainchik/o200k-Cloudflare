@@ -1,0 +1,15 @@
+{
+  "name": "o200k-tokenizer-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker for O200k tokenization",
+  "main": "worker.js",
+  "scripts": {
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "js-tiktoken": "^1.0.7"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}

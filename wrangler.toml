@@ -1,0 +1,23 @@
+name = "o200k-tokenizer"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[build]
+command = "npm install"
+
+[observability.logs]
+enabled = true
+
+[assets]
+directory = "./client/"
+not_found_handling = "single-page-application"
+
+[limits]
+cpu_ms = 30_000
+
+
+# Optional: Custom domain and routes
+# [[routes]]
+# pattern = "tokenizer.yourdomain.com/*"
+# zone_name = "yourdomain.com"
