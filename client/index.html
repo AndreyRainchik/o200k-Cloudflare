@@ -266,27 +266,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        .api-config {
-            margin-bottom: 20px;
-            padding: 15px;
-            background: #e3f2fd;
-            border-radius: 8px;
-        }
-
-        .api-config label {
-            font-weight: 600;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        .api-config input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-family: monospace;
-        }
-
         @media (max-width: 768px) {
             .main-content {
                 padding: 20px;
@@ -314,11 +293,7 @@
         </div>
 
         <div class="main-content">
-            <div class="api-config">
-                <label for="apiUrl">API Base URL:</label>
-                <input type="text" id="apiUrl" value="https://o200k-tokenizer.andrey-bc3.workers.dev" placeholder="Enter your Cloudflare Worker URL">
-            </div>
-
+            
             <div class="tabs">
                 <button class="tab active" onclick="switchTab('encode')">Encode Text</button>
                 <button class="tab" onclick="switchTab('decode')">Decode Tokens</button>
@@ -377,18 +352,8 @@
     </div>
 
     <script>
-        let apiBaseUrl = '';
-
         // Initialize API URL
         document.addEventListener('DOMContentLoaded', function() {
-            const apiUrlInput = document.getElementById('apiUrl');
-            if (apiUrlInput) {
-                apiBaseUrl = apiUrlInput.value;
-                
-                apiUrlInput.addEventListener('change', function() {
-                    apiBaseUrl = this.value;
-                });
-            }
             
             // Verify all required elements exist
             const requiredElements = [
@@ -441,16 +406,11 @@
                 return;
             }
 
-            if (!apiBaseUrl) {
-                showError('encodeResult', 'Please enter your API URL.');
-                return;
-            }
-
             showLoading('encodeLoading');
             hideResult('encodeResult');
 
             try {
-                const response = await fetch(`${apiBaseUrl}/encode`, {
+                const response = await fetch('/encode', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -487,11 +447,6 @@
                 return;
             }
 
-            if (!apiBaseUrl) {
-                showError('decodeResult', 'Please enter your API URL.');
-                return;
-            }
-
             // Parse comma-separated tokens
             let tokens;
             try {
@@ -511,7 +466,7 @@
             hideResult('decodeResult');
 
             try {
-                const response = await fetch(`${apiBaseUrl}/decode`, {
+                const response = await fetch('/decode', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
