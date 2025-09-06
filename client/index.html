@@ -193,7 +193,7 @@
 
         .result-header {
             display: flex;
-            justify-content: between;
+            justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
         }
@@ -232,21 +232,6 @@
             overflow-y: auto;
             white-space: pre-wrap;
             word-break: break-all;
-        }
-
-        .token-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-        }
-
-        .token {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-family: 'Courier New', monospace;
         }
 
         .error {
@@ -331,7 +316,7 @@
         <div class="main-content">
             <div class="api-config">
                 <label for="apiUrl">API Base URL:</label>
-                <input type="text" id="apiUrl" value="https://o200k-tokenizer.andrey-bc3.workers.dev/" placeholder="Enter your Cloudflare Worker URL">
+                <input type="text" id="apiUrl" value="https://o200k-tokenizer.andrey-bc3.workers.dev" placeholder="Enter your Cloudflare Worker URL">
             </div>
 
             <div class="tabs">
@@ -360,9 +345,7 @@
                         <div class="token-count" id="encodeTokenCount"></div>
                         <button class="copy-btn" onclick="copyResult('encodeTokens')">📋 Copy Tokens</button>
                     </div>
-                    <div class="result-content">
-                        <div class="token-list" id="encodeTokens"></div>
-                    </div>
+                    <div class="result-content" id="encodeTokens"></div>
                 </div>
             </div>
 
@@ -432,14 +415,25 @@
             });
             
             // Show selected tab content
-            document.getElementById(tabName + '-tab').classList.add('active');
+            const targetTab = document.getElementById(tabName + '-tab');
+            if (targetTab) {
+                targetTab.classList.add('active');
+            }
             
             // Add active class to clicked tab
-            event.target.classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
         }
 
         async function encodeText() {
             const textInput = document.getElementById('textInput');
+            
+            if (!textInput) {
+                console.error('Text input element not found');
+                return;
+            }
+            
             const text = textInput.value.trim();
             
             if (!text) {
@@ -480,6 +474,12 @@
 
         async function decodeTokens() {
             const tokenInput = document.getElementById('tokenInput');
+            
+            if (!tokenInput) {
+                console.error('Token input element not found');
+                return;
+            }
+            
             const tokenText = tokenInput.value.trim();
             
             if (!tokenText) {
@@ -538,11 +538,16 @@
             const tokenCountDiv = document.getElementById('encodeTokenCount');
             const tokensDiv = document.getElementById('encodeTokens');
             
+            // Check if elements exist before setting content
+            if (!resultDiv || !tokenCountDiv || !tokensDiv) {
+                console.error('Required result elements not found');
+                return;
+            }
+            
             tokenCountDiv.textContent = `Token Count: ${result.tokenCount}`;
             
-            tokensDiv.innerHTML = result.tokens.map(token => 
-                `<span class="token">${token}</span>`
-            ).join('');
+            // Display tokens as plain text (comma-separated) instead of styled spans
+            tokensDiv.textContent = result.tokens.join(', ');
             
             resultDiv.classList.remove('error');
             resultDiv.style.display = 'block';
@@ -553,6 +558,12 @@
             const tokenCountDiv = document.getElementById('decodeTokenCount');
             const textDiv = document.getElementById('decodeText');
             
+            // Check if elements exist before setting content
+            if (!resultDiv || !tokenCountDiv || !textDiv) {
+                console.error('Required result elements not found');
+                return;
+            }
+            
             tokenCountDiv.textContent = `Token Count: ${result.tokenCount}`;
             textDiv.textContent = result.text;
             
@@ -562,25 +573,43 @@
 
         function showError(resultId, message) {
             const resultDiv = document.getElementById(resultId);
+            if (!resultDiv) {
+                console.error(`Result element ${resultId} not found`);
+                return;
+            }
+            
             resultDiv.innerHTML = `<div class="result-content">${message}</div>`;
             resultDiv.classList.add('error');
             resultDiv.style.display = 'block';
         }
 
         function showLoading(loadingId) {
-            document.getElementById(loadingId).classList.add('show');
+            const loadingDiv = document.getElementById(loadingId);
+            if (loadingDiv) {
+                loadingDiv.classList.add('show');
+            }
         }
 
         function hideLoading(loadingId) {
-            document.getElementById(loadingId).classList.remove('show');
+            const loadingDiv = document.getElementById(loadingId);
+            if (loadingDiv) {
+                loadingDiv.classList.remove('show');
+            }
         }
 
         function hideResult(resultId) {
-            document.getElementById(resultId).style.display = 'none';
+            const resultDiv = document.getElementById(resultId);
+            if (resultDiv) {
+                resultDiv.style.display = 'none';
+            }
         }
 
         function clearInput(inputId) {
-            document.getElementById(inputId).value = '';
+            const inputElement = document.getElementById(inputId);
+            if (inputElement) {
+                inputElement.value = '';
+            }
+            
             if (inputId === 'textInput') {
                 hideResult('encodeResult');
             } else {
@@ -590,22 +619,22 @@
 
         function copyResult(elementId) {
             const element = document.getElementById(elementId);
-            let textToCopy;
-            
-            if (elementId === 'encodeTokens') {
-                const tokens = Array.from(element.querySelectorAll('.token')).map(span => span.textContent);
-                textToCopy = tokens.join(', ');
-            } else {
-                textToCopy = element.textContent;
+            if (!element) {
+                console.error(`Element ${elementId} not found`);
+                return;
             }
+            
+            let textToCopy = element.textContent;
             
             navigator.clipboard.writeText(textToCopy).then(() => {
                 const button = event.target;
-                const originalText = button.textContent;
-                button.textContent = '✅ Copied!';
-                setTimeout(() => {
-                    button.textContent = originalText;
-                }, 2000);
+                if (button) {
+                    const originalText = button.textContent;
+                    button.textContent = '✅ Copied!';
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                    }, 2000);
+                }
             }).catch(err => {
                 console.error('Failed to copy: ', err);
                 alert('Failed to copy to clipboard');
@@ -616,7 +645,7 @@
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && e.key === 'Enter') {
                 const activeTab = document.querySelector('.tab-content.active');
-                if (activeTab.id === 'encode-tab') {
+                if (activeTab && activeTab.id === 'encode-tab') {
                     encodeText();
                 } else {
                     decodeTokens();
