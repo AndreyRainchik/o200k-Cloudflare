@@ -4,12 +4,12 @@
   
   <!-- Main page -->
   <url>
-    <loc>https://o200k-tokenizer.workers.dev/</loc>
+    <loc>https://o200kdecode.com/</loc>
     <lastmod>2025-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://o200k-tokenizer.workers.dev/og-image.png</image:loc>
+      <image:loc>https://o200kdecode.com/og-image.png</image:loc>
       <image:title>O200k Tokenizer - GPT-4o Compatible Tool</image:title>
       <image:caption>Free online O200k tokenizer for encoding and decoding text with GPT-4o compatibility</image:caption>
     </image:image>
@@ -17,7 +17,7 @@
   
   <!-- Encode functionality (if you add hash routing in the future) -->
   <url>
-    <loc>https://o200k-tokenizer.workers.dev/#encode</loc>
+    <loc>https://o200kdecode.com/#encode</loc>
     <lastmod>2025-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -25,7 +25,7 @@
   
   <!-- Decode functionality (if you add hash routing in the future) -->
   <url>
-    <loc>https://o200k-tokenizer.workers.dev/#decode</loc>
+    <loc>https://o200kdecode.com/#decode</loc>
     <lastmod>2025-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -33,7 +33,7 @@
   
   <!-- Static assets that might be relevant for indexing -->
   <url>
-    <loc>https://o200k-tokenizer.workers.dev/site.webmanifest</loc>
+    <loc>https://o200kdecode.com/site.webmanifest</loc>
     <lastmod>2025-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
