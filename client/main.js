@@ -11,9 +11,32 @@ document.addEventListener('DOMContentLoaded', function() {
     if (missingElements.length > 0) {
         console.error('Missing required elements:', missingElements);
     }
+
+    // Initialize deep linking
+    initializeDeepLinking();
 });
 
-function switchTab(tabName) {
+// Deep linking functionality
+function initializeDeepLinking() {
+    // Handle initial page load
+    handleHashChange();
+    
+    // Listen for hash changes (back/forward buttons)
+    window.addEventListener('hashchange', handleHashChange);
+}
+
+function handleHashChange() {
+    const hash = window.location.hash.slice(1); // Remove the '#'
+    
+    // Default to 'encode' if no hash or invalid hash
+    const validTabs = ['encode', 'decode'];
+    const targetTab = validTabs.includes(hash) ? hash : 'encode';
+    
+    // Switch to the appropriate tab without triggering another hash change
+    switchTabByName(targetTab, false);
+}
+
+function switchTabByName(tabName, updateHash = true) {
     // Hide all tab contents
     document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
@@ -30,10 +53,29 @@ function switchTab(tabName) {
         targetTab.classList.add('active');
     }
     
-    // Add active class to clicked tab
-    if (event && event.target) {
-        event.target.classList.add('active');
+    // Add active class to the corresponding tab button
+    const tabButtons = document.querySelectorAll('.tab');
+    tabButtons.forEach(button => {
+        if (button.textContent.toLowerCase().includes(tabName)) {
+            button.classList.add('active');
+        }
+    });
+    
+    // Update URL hash if requested
+    if (updateHash) {
+        updateUrlHash(tabName);
     }
+}
+
+function updateUrlHash(tabName) {
+    // Update URL without triggering hashchange event
+    const newUrl = window.location.pathname + window.location.search + '#' + tabName;
+    history.replaceState(null, null, newUrl);
+}
+
+function switchTab(tabName) {
+    // Updated switchTab function that includes deep linking
+    switchTabByName(tabName, true);
 }
 
 async function encodeText() {
