@@ -318,7 +318,7 @@
                 <div id="encodeResult" class="result-section" style="display: none;">
                     <div class="result-header">
                         <div class="token-count" id="encodeTokenCount"></div>
-                        <button class="copy-btn" onclick="copyResult('encodeTokens')">📋 Copy Tokens</button>
+                        <button class="copy-btn" onclick="copyResult('encodeTokens', this)">📋 Copy Tokens</button>
                     </div>
                     <div class="result-content" id="encodeTokens"></div>
                 </div>
@@ -343,7 +343,7 @@
                 <div id="decodeResult" class="result-section" style="display: none;">
                     <div class="result-header">
                         <div class="token-count" id="decodeTokenCount"></div>
-                        <button class="copy-btn" onclick="copyResult('decodeText')">📋 Copy Text</button>
+                        <button class="copy-btn" onclick="copyResult('decodeText', this)">📋 Copy Text</button>
                     </div>
                     <div class="result-content" id="decodeText"></div>
                 </div>
@@ -572,7 +572,7 @@
             }
         }
 
-        function copyResult(elementId) {
+        function copyResult(elementId, button) {
             const element = document.getElementById(elementId);
             if (!element) {
                 console.error(`Element ${elementId} not found`);
@@ -582,7 +582,6 @@
             let textToCopy = element.textContent;
             
             navigator.clipboard.writeText(textToCopy).then(() => {
-                const button = event.target;
                 if (button) {
                     const originalText = button.textContent;
                     button.textContent = '✅ Copied!';
