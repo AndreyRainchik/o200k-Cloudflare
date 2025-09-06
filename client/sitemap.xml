@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Main page -->
+  <url>
+    <loc>https://o200k-tokenizer.workers.dev/</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://o200k-tokenizer.workers.dev/og-image.png</image:loc>
+      <image:title>O200k Tokenizer - GPT-4o Compatible Tool</image:title>
+      <image:caption>Free online O200k tokenizer for encoding and decoding text with GPT-4o compatibility</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Encode functionality (if you add hash routing in the future) -->
+  <url>
+    <loc>https://o200k-tokenizer.workers.dev/#encode</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Decode functionality (if you add hash routing in the future) -->
+  <url>
+    <loc>https://o200k-tokenizer.workers.dev/#decode</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Static assets that might be relevant for indexing -->
+  <url>
+    <loc>https://o200k-tokenizer.workers.dev/site.webmanifest</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>

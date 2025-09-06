@@ -16,8 +16,6 @@ not_found_handling = "single-page-application"
 [limits]
 cpu_ms = 30_000
 
-
-# Optional: Custom domain and routes
-# [[routes]]
-# pattern = "tokenizer.yourdomain.com/*"
-# zone_name = "yourdomain.com"
+[[routes]]
+pattern = "o200kdecode.com"
+custom_domain = true

@@ -1,0 +1,61 @@
+# Robots.txt for O200k Tokenizer
+# Generated for GPT-4o compatible tokenization tool
+
+# Allow all well-behaved robots
+User-agent: *
+Allow: /
+
+# Allow main page and static assets
+Allow: /index.html
+Allow: /styles.css
+Allow: /main.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.svg
+Allow: /*.ico
+Allow: /site.webmanifest
+Allow: /apple-touch-icon.png
+Allow: /favicon-32x32.png
+Allow: /favicon-16x16.png
+
+# Disallow API endpoints (not useful for search indexing)
+Disallow: /encode
+Disallow: /decode
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+# Be more restrictive with aggressive crawlers
+User-agent: MJ12bot
+Crawl-delay: 10
+
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+# Block known bad bots
+User-agent: SemrushBot-SA
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Sitemap location (update with your actual domain)
+Sitemap: https://o200kdecode.com/sitemap.xml
