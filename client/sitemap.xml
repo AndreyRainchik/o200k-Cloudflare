@@ -5,7 +5,7 @@
   <!-- Main page -->
   <url>
     <loc>https://o200k-tokenizer.workers.dev/</loc>
-    <lastmod>2025-01-15</lastmod>
+    <lastmod>2025-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -18,7 +18,7 @@
   <!-- Encode functionality (if you add hash routing in the future) -->
   <url>
     <loc>https://o200k-tokenizer.workers.dev/#encode</loc>
-    <lastmod>2025-01-15</lastmod>
+    <lastmod>2025-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -26,7 +26,7 @@
   <!-- Decode functionality (if you add hash routing in the future) -->
   <url>
     <loc>https://o200k-tokenizer.workers.dev/#decode</loc>
-    <lastmod>2025-01-15</lastmod>
+    <lastmod>2025-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -34,7 +34,7 @@
   <!-- Static assets that might be relevant for indexing -->
   <url>
     <loc>https://o200k-tokenizer.workers.dev/site.webmanifest</loc>
-    <lastmod>2025-01-15</lastmod>
+    <lastmod>2025-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
