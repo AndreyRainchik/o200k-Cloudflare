@@ -9,7 +9,7 @@ This application provides a web interface and API for encoding and decoding text
 - Node.js installed locally
 - Wrangler CLI installed (`npm install -g wrangler`)
 
-### Backend Deployment (Cloudflare Worker)
+### Deployment (Cloudflare Worker)
 
 1. **Clone/Download the files:**
    - `worker.js` - The main worker script
@@ -33,26 +33,6 @@ This application provides a web interface and API for encoding and decoding text
 
 5. **Note your worker URL:**
    After deployment, you'll get a URL like: `https://o200k-tokenizer.your-subdomain.workers.dev`
-
-### Frontend Deployment (Cloudflare Pages)
-
-#### Option 1: Direct Upload
-1. Go to [Cloudflare Pages](https://pages.cloudflare.com/)
-2. Create a new project
-3. Upload the `index.html` file
-4. Deploy
-
-#### Option 2: Git Integration
-1. Create a new repository with the `index.html` file
-2. Connect it to Cloudflare Pages
-3. Deploy
-
-### Configuration
-
-1. **Update API URL in Frontend:**
-   - Open the deployed frontend
-   - Enter your worker URL in the "API Base URL" field
-   - Or modify the default URL in `index.html` line 334
 
 ## 🔧 API Endpoints
 
@@ -94,9 +74,6 @@ Decode O200k tokens to text.
 }
 ```
 
-### GET /
-Get API information.
-
 ## 🎯 Features
 
 - **Real-time tokenization** using the O200k encoding (GPT-4o compatible)
@@ -116,11 +93,11 @@ Get API information.
 ## 🛠️ Customization
 
 ### Changing the Tokenizer
-To use a different tokenizer, modify line 6 in `worker.js`:
+To use a different tokenizer, modify line 22 in `worker.js`:
 ```javascript
-const encoding = get_encoding('cl100k_base'); // For GPT-3.5/GPT-4
+const encoding = new Tiktoken(cl100k_base); // For GPT-3.5/GPT-4
 // or
-const encoding = get_encoding('p50k_base');   // For older models
+const encoding = new Tiktoken(p50k_base);   // For older models
 ```
 
 ### Adding Authentication
@@ -133,7 +110,7 @@ if (apiKey !== 'Bearer YOUR_API_KEY') {
 ```
 
 ### Custom Styling
-Modify the CSS in `index.html` to match your brand colors and styling preferences.
+Modify the CSS in `styles.css` to match your brand colors and styling preferences.
 
 ## 📊 Token Limits
 
