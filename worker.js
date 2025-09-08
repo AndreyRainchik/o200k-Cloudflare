@@ -23,7 +23,8 @@ export default {
 
       if (url.pathname === '/encode' && request.method === 'POST') {
         const { text } = await request.json();
-        
+        const requestId = request.headers.get('cf-request-id');
+        console.log('[INFO](',requestId,'|/encode): Received ',text);
         if (!text || typeof text !== 'string') {
           return new Response(
             JSON.stringify({ error: 'Invalid input. Please provide a text string.' }), 
@@ -33,7 +34,7 @@ export default {
 
         const tokens = encoding.encode(text);
         const tokenCount = tokens.length;
-        
+        console.log('[INFO](',requestId,'|/encode): Returning ',Array.from(tokens));
         return new Response(
           JSON.stringify({ 
             tokens: Array.from(tokens), 
@@ -46,7 +47,8 @@ export default {
 
       if (url.pathname === '/decode' && request.method === 'POST') {
         const { tokens } = await request.json();
-        
+        const requestId = request.headers.get('cf-request-id');
+        console.log('[INFO](',requestId,'|/decode): Received ',tokens);
         if (!Array.isArray(tokens) || !tokens.every(t => Number.isInteger(t) && t >= 0)) {
           return new Response(
             JSON.stringify({ error: 'Invalid input. Please provide an array of positive integers.' }), 
@@ -56,7 +58,7 @@ export default {
 
         try {
           const text = encoding.decode(new Uint32Array(tokens));
-          
+          console.log('[INFO](',requestId,'|/decode): Returning ',text);
           return new Response(
             JSON.stringify({ 
               text, 
