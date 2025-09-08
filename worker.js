@@ -75,20 +75,6 @@ export default {
         }
       }
 
-      if (url.pathname === '/' && request.method === 'GET') {
-        return new Response(
-          JSON.stringify({ 
-            message: 'O200k Tokenizer API',
-            endpoints: {
-              'POST /encode': 'Encode text to tokens',
-              'POST /decode': 'Decode tokens to text'
-            },
-            encoding: 'o200k_base'
-          }), 
-          { headers: corsHeaders }
-        );
-      }
-
       return new Response(
         JSON.stringify({ error: 'Not found' }), 
         { status: 404, headers: corsHeaders }
