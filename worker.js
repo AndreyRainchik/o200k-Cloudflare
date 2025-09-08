@@ -23,7 +23,7 @@ export default {
 
       if (url.pathname === '/encode' && request.method === 'POST') {
         const { text } = await request.json();
-        const requestId = request.headers.get('cf-request-id');
+        const requestId = request.headers.get('cf-ray');
         console.log('[INFO](',requestId,'|/encode): Received ',text);
         if (!text || typeof text !== 'string') {
           return new Response(
@@ -47,7 +47,7 @@ export default {
 
       if (url.pathname === '/decode' && request.method === 'POST') {
         const { tokens } = await request.json();
-        const requestId = request.headers.get('cf-request-id');
+        const requestId = request.headers.get('cf-ray');
         console.log('[INFO](',requestId,'|/decode): Received ',tokens);
         if (!Array.isArray(tokens) || !tokens.every(t => Number.isInteger(t) && t >= 0)) {
           return new Response(
